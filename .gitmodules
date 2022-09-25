@@ -1,0 +1,3 @@
+[submodule "lnproxy"]
+	path = lnproxy
+	url = https://github.com/lnproxy/lnproxy.git

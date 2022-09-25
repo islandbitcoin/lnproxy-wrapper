@@ -3,13 +3,11 @@
 set -e
 
 echo "Setting environment variables..."
-export LNURLP_COMMENTS=$(yq e '.lnurlp-comment-allowed' /root/start9/config.yaml)
-export REQUEST_LIMIT=$(yq e '.request-limit' /root/start9/config.yaml)
+export EXPIRY_BUFFER=$(yq e '.expiry-buffer' /root/start9/config.yaml)
+export FEE_BASE_MSAT=$(yq e '.fee-base-msat' /root/start9/config.yaml)
+export FEE_PPM=$(yq e '.fee-ppm' /root/start9/config.yaml)
 
-echo 'Starting LnMe...'
-exec tini ./lnme \
-  --lnd-address=lnd.embassy:10009 \
-  --lnd-cert-path=/mnt/lnd/tls.cert \
-  --lnd-macaroon-path=/mnt/lnd/invoice.macaroon \
-  --lnurlp-comment-allowed=$LNURLP_COMMENTS \
-  --request-limit=$REQUEST_LIMIT
+while true; do { sleep 100; } done
+
+echo 'Starting lnproxy...'
+exec tini -p SIGTERM go run lnproxy.go

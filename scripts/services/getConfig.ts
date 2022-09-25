@@ -3,18 +3,25 @@
 import { compat, types as T } from "../deps.ts";
 
 export const getConfig: T.ExpectedExports.getConfig = compat.getConfig({
-  "lnurlp-comment-allowed": {
+  "expiry-buffer": {
     "type": "string",
-    "name": "LNURL-pay Comment Length",
-    "description": "Allowed length of LNURL-pay comments, maximum characters is 2000",
+    "name": "Invoice Expiry Buffer",
+    "description": "Time elapsed before the LN Invoice expires",
     "nullable": false,
-    "default": "210"
+    "default": "600"
   },
-  "request-limit": {
+  "fee-base-msat": {
       "type": "string",
-      "name": "Request Limit",
-      "description": "Limit the allowed requests per second",
-      "default": "5",
+      "name": "Base Fee (msats)",
+      "description": "Routing Base Fee to be collected in msats",
+      "default": "1000",
+      "nullable": false
+  },
+  "fee-ppm": {
+      "type": "string",
+      "name": "Fee Rate",
+      "description": "Routing Fee Rate to be collected in msats/million",
+      "default": "6000",
       "nullable": false
   }
 });

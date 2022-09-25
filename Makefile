@@ -18,7 +18,7 @@ clean:
 	rm -f $(ID_NAME).s9pk
 	rm -f scripts/*.js
 
-$(ID_NAME).s9pk: manifest.yaml instructions.md icon.svg LICENSE scripts/embassy.js image.tar
+$(ID_NAME).s9pk: manifest.yaml instructions.md icon.png LICENSE scripts/embassy.js image.tar
 	embassy-sdk pack
 
 image.tar: Dockerfile docker_entrypoint.sh 

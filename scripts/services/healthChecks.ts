@@ -11,7 +11,7 @@ export const health: T.ExpectedExports.health = {
 const healthWeb: T.ExpectedExports.health[""] = async (effects, duration) => {
   await guardDurationAboveMinimum({ duration, minimumTime: 5000 });
 
-  return await effects.fetch("http://lnme.embassy:1323")
+  return await effects.fetch("http://lnproxy.embassy")
     .then((_) => ok)
     .catch((e) => error(e));
 };

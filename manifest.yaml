@@ -1,20 +1,20 @@
-id: lnme 
-title: "LnMe"
-version: 1.5.1
+id: lnproxy 
+title: "lnproxy"
+version: 0.0.1
 release-notes: "Initial Release for EmbassyOS"
-license: mit
-wrapper-repo: "https://github.com/islandbitcoin/lnme-wrapper"
-upstream-repo: "https://github.com/bumi/lnme"
-support-site: "https://github.com/bumi/lnme/issues"
-marketing-site: "https://michaelbumann.com"
+license: GLP-3.0
+wrapper-repo: "https://github.com/islandbitcoin/lnproxy-wrapper"
+upstream-repo: "https://github.com/lnproxy/lnproxy"
+support-site: "https://github.com/lnproxy/lnproxy/issues"
+marketing-site: "https://lnproxy.org"
 build: ["make"]
 description:
-  short: Your friendly Bitcoin Lightning ⚡ payment page ⚡
+  short: A wrapped lightning hodl invoice generator
   long: |
-    LnMe is a personal Bitcoin Lightning payment page or widget and self-hosted Lightning Address server.
+    lnproxy takes a bolt 11 invoice and generates a “wrapped” invoice that can be settled if and only if the original invoice is settled. The “wrapped” invoice has the same payment hash, expiry, and description, as the invoice it wraps but adds a small routing fee to the amount. The “wrapped” invoice can be used anywhere the original invoice would be used to trustlessly hide the destination of a payment. 
 assets:
   license: LICENSE
-  icon: icon.svg
+  icon: icon.png
   instructions: instructions.md
   docker-images: image.tar
 main:
@@ -28,7 +28,7 @@ main:
 health-checks:
   web-ui:
     name: Web UI
-    success-message: lnme is ready to visit in a web browser
+    success-message: lnproxy is ready to visit in a web browser
     type: script
 config: 
   get:
@@ -48,15 +48,15 @@ volumes:
     readonly: true
 interfaces:
   main:
-    name: LnMe Web Interface
+    name: lnproxy Web Interface
     description: Specifies the interface to listen on for HTTP connections.
     tor-config:
       port-mapping:
-        80: "1323"
+        80: "80"
     lan-config:
       443:
         ssl: true
-        internal: 1323
+        internal: 80
     ui: true
     protocols:
       - tcp
